@@ -14,6 +14,10 @@ namespace SwimApp
 
         static List<string> teamReserve = new List<string>();
 
+        static float fastestTime = 9999f;
+
+        static string topSwimmer = "";
+
         static void OneSwimmer()
         {
 
@@ -26,6 +30,8 @@ namespace SwimApp
             Console.WriteLine($"Swimmer Name: {swimmerName}");
 
             float sumTotalTime = 0;
+
+            string allocatedTeam = "Reserve";
 
             //loop four times
             for (int i = 0; i < 4; i++)
@@ -42,7 +48,7 @@ namespace SwimApp
 
                 totalTime = (minutes * 60) + seconds;
 
-                Console.WriteLine($"Swimmer Time {i + 1}: {minutes} min {seconds} seconds\nTotal time in seconds: {seconds}\n");
+                Console.WriteLine($"Swimmer Time {i + 1}: {minutes} min {seconds} seconds\t\tTotal time in seconds: {seconds}s");
 
                 //calculating average time
 
@@ -53,27 +59,50 @@ namespace SwimApp
 
             float avgTime = sumTotalTime / 4;
 
+            if (avgTime < fastestTime)
+            {
+                fastestTime = avgTime;
+
+                topSwimmer = swimmerName;
+            }
+
             //assign the swimmer to a team
             //nested if statement
             if (avgTime <= 160)
             {
                 teamA.Add(swimmerName);
+                allocatedTeam = "A";
             }
             else if (avgTime <= 210)
             {
                 teamB.Add(swimmerName);
+                allocatedTeam = "B";
             }
             {
                 teamReserve.Add(swimmerName);
+
             }
 
             Console.WriteLine($"Avg time : {avgTime}");
+
+            Console.WriteLine($"Team: {allocatedTeam}");
 
         }
 
         static void Main(string[] args)
         {
-            OneSwimmer();
+            string flag = "";
+            while (!flag.Equals("Stop"))
+            {
+                OneSwimmer();
+
+                Console.WriteLine("Press <Enter> to add another swimmer or type 'Stop' to end");
+
+                flag = Console.ReadLine();
+            }
+
+            Console.WriteLine($"The fastest swimmer: {topSwimmer} with an average time of {fastestTime} seconds.");
+
         }
     }
 } 
