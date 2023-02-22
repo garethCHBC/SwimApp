@@ -89,6 +89,12 @@ namespace SwimApp
 
         }
 
+        //returns string containing team lists
+        static string CreateTeamLists("")
+        {
+
+        }
+
         static void Main(string[] args)
         {
             string flag = "";
