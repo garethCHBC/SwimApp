@@ -90,9 +90,35 @@ namespace SwimApp
         }
 
         //returns string containing team lists
-        static string CreateTeamLists("")
+        static string CreateTeamLists()
         {
+            string teamLists = "The Teams are:\n\nTeam A\n";
+            //adding each team to team lists
+            foreach (string swimmer in teamA)
+            {
+                //seperation between names
+                teamLists += swimmer + "\t";
+            }
 
+            teamLists += $"\n\nwith {teamA.Count} team members(s)\n\nTeam B:";
+
+            foreach (string swimmer in teamB)
+            {
+                //seperation between names
+                teamLists += swimmer + "\t";
+            }
+
+            teamLists += $"with {teamB.Count} team members(s)Team Reserve:\n\n";
+
+            foreach (string swimmer in teamReserve)
+            {
+                //seperation between names
+                teamLists += swimmer + "\t";
+            }
+
+            teamLists += $"with {teamReserve.Count} team members(s)\n\n";
+
+            return teamLists;
         }
 
         static void Main(string[] args)
@@ -108,6 +134,8 @@ namespace SwimApp
             }
 
             Console.WriteLine($"The fastest swimmer: {topSwimmer} with an average time of {fastestTime} seconds.");
+
+            Console.WriteLine(CreateTeamLists());
 
         }
     }
